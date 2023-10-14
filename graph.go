@@ -3,8 +3,7 @@ package main
 import "fmt"
 
 type Edge struct {
-	dst int
-	wgt int
+	src, dst, wgt int
 }
 
 type Vertex struct {
@@ -13,16 +12,18 @@ type Vertex struct {
 }
 
 type Graph struct {
+	size int
 	nodes []Vertex
 }
 
 func (g *Graph) AddVertex(n int) {
 	v  := Vertex{Key: n}
 	g.nodes = append(g.nodes, v)
+	g.size++
 }
 
 func (g *Graph) AddEdge(src, dst, wgt int) {
-	e := Edge{dst, wgt}
+	e := Edge{src, dst, wgt}
 	g.nodes[src].ng = append(g.nodes[src].ng, e)
 }
 
