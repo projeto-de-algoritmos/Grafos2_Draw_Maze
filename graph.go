@@ -22,16 +22,15 @@ func (g *Graph) AddVertex(n int) {
 	g.size++
 }
 
-func (g *Graph) AddEdge(src, dst, wgt int) {
-	e := Edge{src, dst, wgt}
-	g.nodes[src].ng = append(g.nodes[src].ng, e)
+func (g *Graph) AddEdge(e Edge) {
+	g.nodes[e.src].ng = append(g.nodes[e.src].ng, e)
 }
 
 func (g *Graph) Print() {
 	for i, node := range g.nodes {
-		fmt.Printf("%d| %d:", i, node.Key)
+		fmt.Printf("%d\t| %d:", i, node.Key)
 		for _, e := range node.ng {
-			fmt.Printf("- %d -> %d |", e.wgt, g.nodes[e.dst].Key)
+			fmt.Printf("- %d -> %d\t|", e.wgt, g.nodes[e.dst].Key)
 		}
 		fmt.Print("\n")
 	}

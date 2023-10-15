@@ -2,6 +2,7 @@ package main
 
 import (
 	"container/heap"
+	"fmt"
 )
 
 func incrementPath(ng *[]Edge, wgt int) {
@@ -10,7 +11,17 @@ func incrementPath(ng *[]Edge, wgt int) {
 	}
 }
 
-func Djikstra (g Graph, src, dst int) (int) {
+func printPath(e []Edge, src, dst int) {
+	if src != dst {
+		printPath(e, src, e[dst].src)
+		fmt.Printf(" -> %d", e[dst].src)
+	} else {
+		fmt.Printf("Caminho:")
+	}
+
+}
+
+func Djikstra (g Graph, src, dst int) {
 	pq := PathHeap{}
 	heap.Init(&pq)	
 
@@ -37,11 +48,14 @@ func Djikstra (g Graph, src, dst int) (int) {
 		}
 
 		if path.dst == dst {
-			return path.wgt
+			printPath(dist, src, dst)
+			fmt.Printf("\n")
+			fmt.Println("Tamanho: ", path.wgt)
+			return
 		}
 
 		neighbors = g.nodes[path.dst].ng
 		incrementPath(&neighbors, path.wgt)
 	}
-	return -1
+	fmt.Println("Não existe caminho :/")
 }
