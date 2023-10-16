@@ -45,3 +45,5 @@ Existe alguns input prontos para realizar os testes, para utilizar:
 ```sh
 go run main.go < in1.txt 
 ```
+## Outros
+O vídeo também está disponível pelo Youtube, [link](https://youtu.be/JwVuqTU6DtE).
