@@ -15,9 +15,9 @@ func incrementPath(ng *[]structure.Edge, wgt int) {
 func printPath(e []structure.Edge, src, dst int) {
 	if src != dst {
 		printPath(e, src, e[dst].Src)
-		fmt.Printf(" -> %d", e[dst].Src)
+		fmt.Printf(" -> %d", e[dst].Dst)
 	} else {
-		fmt.Printf("Caminho:")
+		fmt.Printf("Caminho: %d", src)
 	}
 
 }
@@ -49,6 +49,7 @@ func Djikstra (g structure.Graph, src, dst int) {
 		}
 
 		if path.Dst == dst {
+			println("Caminho de ",src,"até ",dst)
 			printPath(dist, src, dst)
 			fmt.Printf("\n")
 			fmt.Println("Tamanho: ", path.Wgt)

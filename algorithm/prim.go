@@ -12,6 +12,7 @@ func Prim (g structure.Graph) {
 
 	visited := make([]bool, g.Size)
 	dist := make([]structure.Edge, 0, g.Size)
+	var wgt int
 
 	visited[0] = true
 	ng := g.Nodes[0].Ng
@@ -23,15 +24,16 @@ func Prim (g structure.Graph) {
 			}
 		}
 		path := heap.Pop(&pq).(structure.Edge)
+		wgt += path.Wgt
 		visited[path.Dst] = true
 		dist = append(dist, path)
-		fmt.Println(dist)
 		s--
 		if !(pq.Len() > 0) {
 			break
 		}
 		ng = g.Nodes[path.Dst].Ng
 	}
+	fmt.Println("A MST é:")
 	fmt.Print(dist)
-
+	fmt.Println("Peso:", wgt)
 }

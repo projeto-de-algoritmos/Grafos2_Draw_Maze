@@ -13,40 +13,42 @@ type Vertex struct {
 
 type Graph struct {
 	Size int
-	//nodes []Vertex
-	Nodes map[int]*Vertex
+	Nodes []Vertex
 }
 
 func (g *Graph) AddVertex(n int) {
+
 	v  := Vertex{Key: n}
-	//g.nodes = append(g.nodes, v)
-	g.Nodes[n] = &v
-	g.Size++
+
+	if(g.Nodes[n].isEmpty()) {
+		g.Nodes = append(g.Nodes, v)
+		g.Size++
+	}
 }
 
-func (g *Graph) AddEdge(e Edge) {
-	//g.nodes[e.src].ng = append(g.nodes[e.src].ng, e)
+func (e Vertex) isEmpty() bool {
+	return (e.Key == 0)
+}
+
+func (g *Graph) AddDEdge(e Edge) {
 	g.Nodes[e.Src].Ng = append(g.Nodes[e.Src].Ng, e)
 }
 
-func (g *Graph) Init() {
-	g.Nodes = make(map[int]*Vertex)
+func (g *Graph) AddEdge(e Edge) {
+	ed := Edge{Src: e.Dst, Dst: e.Src, Wgt: e.Wgt}
+	g.Nodes[e.Src].Ng = append(g.Nodes[e.Src].Ng, e)
+	g.Nodes[e.Dst].Ng = append(g.Nodes[e.Dst].Ng, ed)
 }
-func (g *Graph) InitGraph(edges []Edge) {
 
-	for i := 0; i<len(edges); i++ {
-		g.AddVertex(i)	
-	}
-	for _, e := range edges {
-		g.AddEdge(e)
-	}
+func (g *Graph) Init(size int) {
+	g.Nodes = make([]Vertex, size, size)
 }
 
 func (g *Graph) Print() {
-	for i, node := range g.Nodes {
-		fmt.Printf("%d\t| %d:", i, node.Key)
-		for _, e := range node.Ng {
-			fmt.Printf("- %d -> %d\t|", e.Wgt, g.Nodes[e.Dst].Key)
+	for i:= 0; i< g.Size; i++ {
+		fmt.Printf("%d\t| ", i)
+		for _, e := range g.Nodes[i].Ng {
+			fmt.Printf("%d -> %d\t|", e.Wgt, e.Dst)
 		}
 		fmt.Print("\n")
 	}

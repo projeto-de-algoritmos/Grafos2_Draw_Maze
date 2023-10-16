@@ -1,65 +1,53 @@
 package main
 
 import (
+	"fmt"
 	"proj/algorithm"
 	"proj/structure"
 )
 
 func main() {
 	graph := structure.Graph{}
-	edge := structure.Edge{Src:0, Dst: 6, Wgt: 9}
 
-	graph.Init()
-	for i := 0; i < 8; i++ {
+	fmt.Println("Insira 1: para Dijkstra, 2: para Prim")
+	var opt int
+	fmt.Scanf("%d", &opt)
+
+	fmt.Println("Informe o número de nós do grafo.")
+	var size int
+	fmt.Scanf("%d", &size)
+	graph.Init(size)
+
+	for i := 0; i < size; i++ {
 			graph.AddVertex(i)
 	}
 
-	graph.AddEdge(edge)
-	graph.AddEdge(structure.Edge{Src:0, Dst:6, Wgt:14})
-	graph.AddEdge(structure.Edge{Src:0, Dst:7, Wgt:15})
-	graph.AddEdge(structure.Edge{Src:2, Dst:3, Wgt:23})
-	graph.AddEdge(structure.Edge{Src:3, Dst:1, Wgt:19})
-	graph.AddEdge(structure.Edge{Src:3, Dst:5, Wgt:2})
-	graph.AddEdge(structure.Edge{Src:4, Dst:3, Wgt:6})
-	graph.AddEdge(structure.Edge{Src:4, Dst:1, Wgt:6})
-	graph.AddEdge(structure.Edge{Src:5, Dst:4, Wgt:11})
-	graph.AddEdge(structure.Edge{Src:5, Dst:1, Wgt:16})
-	graph.AddEdge(structure.Edge{Src:6, Dst:3, Wgt:18})
-	graph.AddEdge(structure.Edge{Src:6, Dst:5, Wgt:30})
-	graph.AddEdge(structure.Edge{Src:6, Dst:7, Wgt:5})
-	graph.AddEdge(structure.Edge{Src:7, Dst:5, Wgt:20})
-	graph.AddEdge(structure.Edge{Src:7, Dst:1, Wgt:44})
+	fmt.Println("Informe os caminhos de A para B e seu peso. (Ex: 0 3 5); Se um dado for negativo a sessão é terminada.")
 
-	graph.Print()
-
-	algorithm.Djikstra(graph, 0, 1)
-
-	g :=structure.Graph{}
-	g.Init()
-	for i := 0; i < 6; i++ {
-			g.AddVertex(i)
+	for {
+		var src, dst, wgt int
+		fmt.Scanf("%d %d %d", &src, &dst, &wgt)
+		if (src<0 || dst<0 || wgt<0){
+			break
+		} 
+		e := structure.Edge{Src: src, Dst: dst, Wgt: wgt}
+		if opt == 1 {
+			graph.AddDEdge(e)
+		} else {
+			graph.AddEdge(e)
+		}
 	}
-	
 
-	g.AddEdge(structure.Edge{Src:0, Dst:1, Wgt:2})
-	g.AddEdge(structure.Edge{Src:0, Dst:2, Wgt:3})
-	g.AddEdge(structure.Edge{Src:1, Dst:2, Wgt:5})
-	g.AddEdge(structure.Edge{Src:1, Dst:3, Wgt:4})
-	g.AddEdge(structure.Edge{Src:1, Dst:4, Wgt:4})
-	g.AddEdge(structure.Edge{Src:2, Dst:4, Wgt:5})
-	g.AddEdge(structure.Edge{Src:3, Dst:4, Wgt:2})
-	g.AddEdge(structure.Edge{Src:3, Dst:5, Wgt:3})
-	g.AddEdge(structure.Edge{Src:4, Dst:5, Wgt:5})
 
-	g.AddEdge(structure.Edge{Src:1, Dst:0, Wgt:2})
-	g.AddEdge(structure.Edge{Src:2, Dst:0, Wgt:3})
-	g.AddEdge(structure.Edge{Src:2, Dst:1, Wgt:5})
-	g.AddEdge(structure.Edge{Src:3, Dst:1, Wgt:4})
-	g.AddEdge(structure.Edge{Src:4, Dst:1, Wgt:4})
-	g.AddEdge(structure.Edge{Src:4, Dst:2, Wgt:5})
-	g.AddEdge(structure.Edge{Src:4, Dst:3, Wgt:2})
-	g.AddEdge(structure.Edge{Src:5, Dst:3, Wgt:3})
-	g.AddEdge(structure.Edge{Src:5, Dst:4, Wgt:5})
-	algorithm.Prim(g)
+	if opt == 1 {
+		fmt.Println("Informe o caminho (ex: 0 1)")
+		var src, dst int
+		graph.Print()
+		fmt.Scanf("%d %d", &src, &dst)
+		algorithm.Djikstra(graph, src, dst)
+	} else {
+		graph.Print()
+		algorithm.Prim(graph)
+	}
 
 }
