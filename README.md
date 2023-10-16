@@ -1,45 +1,47 @@
-**!! Atenção: Renomeie o seu repositório para (Tema)_(NomeDoProjeto). !!** 
+# Prim e Dijkstra
 
-Temas:
- - Grafos1
- - Grafos2
- - PD
- - D&C
- - Greed
- - Final 
- 
- **!! *Não coloque os nomes dos alunos no título do repositório*. Exemplo de título correto: Grafos2_Labirinto-do-Minotauro !!**
- 
- (Apague essa seção)
-
-# NomedoProjeto
-
-**Número da Lista**: X<br>
-**Conteúdo da Disciplina**: XXXXXXXXXX<br>
+- **Número da Lista**: 19
+- **Conteúdo da Disciplina**: Grafos 2
 
 ## Alunos
+
 |Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 211063069 | Breno Queiroz Lima|
 
 ## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
+O projeto é um implementação do algoritmo de Dijkstra e Prim.
 
 ## Screenshots
 Adicione 3 ou mais screenshots do projeto em funcionamento.
 
+<center>
+
+**Input 1**
+![input 1](./assets/GrafoDirecionado.png)
+
+**Input 2**
+![input 2](./assets/Grafo.png)
+
+![image3](./assets/Terminal.png)
+
+</center>
+
 ## Instalação 
-**Linguagem**: xxxxxx<br>
-**Framework**: (caso exista)<br>
-Descreva os pré-requisitos para rodar o seu projeto e os comandos necessários.
+- **Linguagem**: Go
+
+Para executar o projeto é necessário [baixar](https://go.dev/doc/install) linguagem Go instalada na máquina.
 
 ## Uso 
-Explique como usar seu projeto caso haja algum passo a passo após o comando de execução.
 
-## Outros 
-Quaisquer outras informações sobre seu projeto podem ser descritas abaixo.
+Basta executar
 
+```sh
+go run main.go
+```
 
+Existe alguns input prontos para realizar os testes, para utilizar:
 
-
+```sh
+go run main.go < in1.txt 
+```
